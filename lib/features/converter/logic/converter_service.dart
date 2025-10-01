@@ -18,4 +18,9 @@ class ConverterService {
   static double getDottedNoteMs(double baseMs, int division) {
     return (baseMs / division) * 1.5;
   }
+
+  /// 셋잇단음표 ms 계산 (기본 음표 길이의 2/3배)
+  static double getTripletNoteMs(double baseMs, int division) {
+    return (baseMs / division) * 2 / 3;
+  }
 }

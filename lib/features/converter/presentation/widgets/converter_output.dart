@@ -27,56 +27,76 @@ class ConverterOutput extends StatelessWidget {
 
   Widget _buildMsOutput(double ms) {
     const textStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+    const headerStyle = TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      color: Colors.blue,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 기본 음표
-        Text("1/4 note: ${ms.toStringAsFixed(3)} ms", style: textStyle),
+        // Normal
+        const Text("Normal:", style: headerStyle),
+        Text("1/4: ${ms.toStringAsFixed(3)} ms", style: textStyle),
         Text(
-          "1/8 note: ${ConverterService.getNoteMs(ms, 2).toStringAsFixed(3)} ms",
+          "1/8: ${ConverterService.getNoteMs(ms, 2).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "1/16 note: ${ConverterService.getNoteMs(ms, 4).toStringAsFixed(3)} ms",
+          "1/16: ${ConverterService.getNoteMs(ms, 4).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "1/32 note: ${ConverterService.getNoteMs(ms, 8).toStringAsFixed(3)} ms",
+          "1/32: ${ConverterService.getNoteMs(ms, 8).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "1/64 note: ${ConverterService.getNoteMs(ms, 16).toStringAsFixed(3)} ms",
+          "1/64: ${ConverterService.getNoteMs(ms, 16).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "1/128 note: ${ConverterService.getNoteMs(ms, 32).toStringAsFixed(3)} ms",
+          "1/128: ${ConverterService.getNoteMs(ms, 32).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         const SizedBox(height: 16),
-        // 점음표
-        const Text(
-          "Dotted Notes:",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-        ),
+
+        // Dotted
+        const Text("Dotted (×1.5):", style: headerStyle),
         Text(
-          "Dotted 1/8: ${ConverterService.getDottedNoteMs(ms, 2).toStringAsFixed(3)} ms",
+          "1/8D: ${ConverterService.getDottedNoteMs(ms, 2).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "Dotted 1/16: ${ConverterService.getDottedNoteMs(ms, 4).toStringAsFixed(3)} ms",
+          "1/16D: ${ConverterService.getDottedNoteMs(ms, 4).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "Dotted 1/32: ${ConverterService.getDottedNoteMs(ms, 8).toStringAsFixed(3)} ms",
+          "1/32D: ${ConverterService.getDottedNoteMs(ms, 8).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
         Text(
-          "Dotted 1/64: ${ConverterService.getDottedNoteMs(ms, 16).toStringAsFixed(3)} ms",
+          "1/64D: ${ConverterService.getDottedNoteMs(ms, 16).toStringAsFixed(3)} ms",
+          style: textStyle,
+        ),
+        const SizedBox(height: 16),
+
+        // Triplet
+        const Text("Triplet (×⅔):", style: headerStyle),
+        Text(
+          "1/8T: ${ConverterService.getTripletNoteMs(ms, 2).toStringAsFixed(3)} ms",
+          style: textStyle,
+        ),
+        Text(
+          "1/16T: ${ConverterService.getTripletNoteMs(ms, 4).toStringAsFixed(3)} ms",
+          style: textStyle,
+        ),
+        Text(
+          "1/32T: ${ConverterService.getTripletNoteMs(ms, 8).toStringAsFixed(3)} ms",
+          style: textStyle,
+        ),
+        Text(
+          "1/64T: ${ConverterService.getTripletNoteMs(ms, 16).toStringAsFixed(3)} ms",
           style: textStyle,
         ),
       ],
