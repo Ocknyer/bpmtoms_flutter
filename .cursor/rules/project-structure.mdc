@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+# BPMTOMS 프로젝트 구조 가이드
+
+## 기본 구조
+
+- [main.dart](mdc:lib/main.dart)는 앱의 진입점으로, runApp() 호출만 담당
+- [app.dart](mdc:lib/app.dart)는 MaterialApp 설정과 라우트 관리를 담당
+- 모든 코드는 lib/ 디렉토리 내에 위치
+
+## 디렉토리 구조
+
+1. core/: 앱 전반에 걸쳐 사용되는 공통 리소스
+
+   - theme.dart: 앱 테마 정의
+   - constants.dart: 상수 정의
+   - utils.dart: 유틸리티 함수
+
+2. features/: 기능별 모듈화된 코드
+
+   - 각 기능은 자체 디렉토리에 격리
+   - presentation/: UI 관련 코드
+   - logic/: 비즈니스 로직
+
+3. widgets/: 재사용 가능한 공통 UI 컴포넌트
+
+## 네이밍 컨벤션
+
+- 파일명은 snake_case 사용
+- 클래스명은 PascalCase 사용
+- 변수와 함수는 camelCase 사용

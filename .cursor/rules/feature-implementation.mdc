@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+
+# 기능 구현 가이드라인
+
+## 기능 구조
+
+각 기능(feature)은 다음 구조를 따름:
+
+- presentation/: UI 레이어
+  - screens/: 화면 위젯
+  - widgets/: 화면 전용 위젯
+- logic/: 비즈니스 로직 레이어
+  - services/: 비즈니스 로직
+  - models/: 데이터 모델
+
+## Converter 기능
+
+- [converter_screen.dart](mdc:lib/features/converter/presentation/converter_screen.dart): BPM ↔ ms 변환 UI
+- [converter_service.dart](mdc:lib/features/converter/logic/converter_service.dart): 변환 로직
+
+## Metronome 기능
+
+- [metronome_screen.dart](mdc:lib/features/metronome/presentation/metronome_screen.dart): 메트로놈 UI
+- [metronome_controller.dart](mdc:lib/features/metronome/logic/metronome_controller.dart): 메트로놈 제어 로직
+
+## Settings 기능
+
+- [settings_screen.dart](mdc:lib/features/settings/settings_screen.dart): 설정 화면
