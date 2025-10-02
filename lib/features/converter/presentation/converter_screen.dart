@@ -74,24 +74,26 @@ class _ConverterScreenState extends State<ConverterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("BPMTOMS")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ConverterInput(
-              controller: inputController,
-              mode: mode,
-              onModeChanged: toggleMode,
-              onReset: reset,
-            ),
-            const SizedBox(height: 24),
-            ConverterOutput(
-              mode: mode,
-              msResult: msResult,
-              bpmResult: bpmResult,
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ConverterInput(
+                controller: inputController,
+                mode: mode,
+                onModeChanged: toggleMode,
+                onReset: reset,
+              ),
+              const SizedBox(height: 24),
+              ConverterOutput(
+                mode: mode,
+                msResult: msResult,
+                bpmResult: bpmResult,
+              ),
+            ],
+          ),
         ),
       ),
     );

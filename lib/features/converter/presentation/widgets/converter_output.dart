@@ -17,12 +17,11 @@ class ConverterOutput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (mode == ConverterMode.bpmToMs && msResult != null) {
-      return _buildMsOutput(msResult!);
-    } else if (mode == ConverterMode.msToBpm && bpmResult != null) {
+    if (mode == ConverterMode.msToBpm && bpmResult != null) {
       return _buildBpmOutput(bpmResult!);
     }
-    return const SizedBox.shrink();
+    // BPM → ms 모드일 때는 항상 테이블 표시
+    return _buildMsOutput(msResult ?? 0.0);
   }
 
   Widget _buildMsOutput(double ms) {
@@ -34,70 +33,220 @@ class ConverterOutput extends StatelessWidget {
     );
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Normal
-        const Text("Normal:", style: headerStyle),
-        Text("1/4: ${ms.toStringAsFixed(3)} ms", style: textStyle),
-        Text(
-          "1/8: ${ConverterService.getNoteMs(ms, 2).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/16: ${ConverterService.getNoteMs(ms, 4).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/32: ${ConverterService.getNoteMs(ms, 8).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/64: ${ConverterService.getNoteMs(ms, 16).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/128: ${ConverterService.getNoteMs(ms, 32).toStringAsFixed(3)} ms",
-          style: textStyle,
+        Container(
+          width: 300,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue.shade100),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(7),
+                  ),
+                ),
+                child: const Text(
+                  "Normal",
+                  style: headerStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Table(
+                columnWidths: const {
+                  0: FixedColumnWidth(100),
+                  1: FixedColumnWidth(200),
+                },
+                border: TableBorder(
+                  horizontalInside: BorderSide(color: Colors.blue.shade50),
+                ),
+                children: [
+                  _buildTableRow("1/4", ms, textStyle),
+                  _buildTableRow(
+                    "1/8",
+                    ConverterService.getNoteMs(ms, 2),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/16",
+                    ConverterService.getNoteMs(ms, 4),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/32",
+                    ConverterService.getNoteMs(ms, 8),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/64",
+                    ConverterService.getNoteMs(ms, 16),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/128",
+                    ConverterService.getNoteMs(ms, 32),
+                    textStyle,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 16),
 
         // Dotted
-        const Text("Dotted (×1.5):", style: headerStyle),
-        Text(
-          "1/8D: ${ConverterService.getDottedNoteMs(ms, 2).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/16D: ${ConverterService.getDottedNoteMs(ms, 4).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/32D: ${ConverterService.getDottedNoteMs(ms, 8).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/64D: ${ConverterService.getDottedNoteMs(ms, 16).toStringAsFixed(3)} ms",
-          style: textStyle,
+        Container(
+          width: 300,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue.shade100),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(7),
+                  ),
+                ),
+                child: const Text(
+                  "Dotted (×1.5)",
+                  style: headerStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Table(
+                columnWidths: const {
+                  0: FixedColumnWidth(100),
+                  1: FixedColumnWidth(200),
+                },
+                border: TableBorder(
+                  horizontalInside: BorderSide(color: Colors.blue.shade50),
+                ),
+                children: [
+                  _buildTableRow(
+                    "1/8D",
+                    ConverterService.getDottedNoteMs(ms, 2),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/16D",
+                    ConverterService.getDottedNoteMs(ms, 4),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/32D",
+                    ConverterService.getDottedNoteMs(ms, 8),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/64D",
+                    ConverterService.getDottedNoteMs(ms, 16),
+                    textStyle,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 16),
 
         // Triplet
-        const Text("Triplet (×⅔):", style: headerStyle),
-        Text(
-          "1/8T: ${ConverterService.getTripletNoteMs(ms, 2).toStringAsFixed(3)} ms",
-          style: textStyle,
+        Container(
+          width: 300,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue.shade100),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(7),
+                  ),
+                ),
+                child: const Text(
+                  "Triplet (×⅔)",
+                  style: headerStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Table(
+                columnWidths: const {
+                  0: FixedColumnWidth(100),
+                  1: FixedColumnWidth(200),
+                },
+                border: TableBorder(
+                  horizontalInside: BorderSide(color: Colors.blue.shade50),
+                ),
+                children: [
+                  _buildTableRow(
+                    "1/8T",
+                    ConverterService.getTripletNoteMs(ms, 2),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/16T",
+                    ConverterService.getTripletNoteMs(ms, 4),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/32T",
+                    ConverterService.getTripletNoteMs(ms, 8),
+                    textStyle,
+                  ),
+                  _buildTableRow(
+                    "1/64T",
+                    ConverterService.getTripletNoteMs(ms, 16),
+                    textStyle,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        Text(
-          "1/16T: ${ConverterService.getTripletNoteMs(ms, 4).toStringAsFixed(3)} ms",
-          style: textStyle,
+      ],
+    );
+  }
+
+  TableRow _buildTableRow(String note, double ms, TextStyle style) {
+    return TableRow(
+      decoration: BoxDecoration(color: ms == 0.0 ? Colors.grey.shade50 : null),
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          alignment: Alignment.center,
+          child: Text(note, style: style),
         ),
-        Text(
-          "1/32T: ${ConverterService.getTripletNoteMs(ms, 8).toStringAsFixed(3)} ms",
-          style: textStyle,
-        ),
-        Text(
-          "1/64T: ${ConverterService.getTripletNoteMs(ms, 16).toStringAsFixed(3)} ms",
-          style: textStyle,
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          alignment: Alignment.center,
+          child: Text(
+            ms == 0.0 ? "- - -" : "${ms.toStringAsFixed(3)} ms",
+            style: style.copyWith(
+              color: ms == 0.0 ? Colors.grey.shade600 : style.color,
+              fontFeatures: [
+                if (!ms.isNaN && ms != 0.0) const FontFeature.tabularFigures(),
+              ],
+            ),
+          ),
         ),
       ],
     );
