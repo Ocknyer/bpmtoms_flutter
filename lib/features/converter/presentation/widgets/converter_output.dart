@@ -33,11 +33,11 @@ class ConverterOutput extends StatelessWidget {
     );
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Normal
         Container(
-          width: 300,
+          width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue.shade100),
             borderRadius: BorderRadius.circular(8),
@@ -62,8 +62,8 @@ class ConverterOutput extends StatelessWidget {
               ),
               Table(
                 columnWidths: const {
-                  0: FixedColumnWidth(100),
-                  1: FixedColumnWidth(200),
+                  0: FlexColumnWidth(2), // 음표 열
+                  1: FlexColumnWidth(3), // ms 값 열
                 },
                 border: TableBorder(
                   horizontalInside: BorderSide(color: Colors.blue.shade50),
@@ -104,7 +104,7 @@ class ConverterOutput extends StatelessWidget {
 
         // Dotted & Triplet
         Container(
-          width: 300,
+          width: double.infinity,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue.shade100),
             borderRadius: BorderRadius.circular(8),
@@ -129,10 +129,10 @@ class ConverterOutput extends StatelessWidget {
               ),
               Table(
                 columnWidths: const {
-                  0: FixedColumnWidth(75), // Dotted 음표
-                  1: FixedColumnWidth(75), // Dotted ms
-                  2: FixedColumnWidth(75), // Triplet 음표
-                  3: FixedColumnWidth(75), // Triplet ms
+                  0: FlexColumnWidth(2), // Dotted 음표
+                  1: FlexColumnWidth(3), // Dotted ms
+                  2: FlexColumnWidth(2), // Triplet 음표
+                  3: FlexColumnWidth(3), // Triplet ms
                 },
                 border: TableBorder(
                   horizontalInside: BorderSide(color: Colors.blue.shade50),
@@ -144,7 +144,7 @@ class ConverterOutput extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 6,
-                          horizontal: 8,
+                          horizontal: 4,
                         ),
                         alignment: Alignment.center,
                         child: const Text(
@@ -159,7 +159,7 @@ class ConverterOutput extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 6,
-                          horizontal: 8,
+                          horizontal: 4,
                         ),
                         alignment: Alignment.center,
                         child: const Text(
@@ -174,7 +174,7 @@ class ConverterOutput extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 6,
-                          horizontal: 8,
+                          horizontal: 4,
                         ),
                         alignment: Alignment.center,
                         child: const Text(
@@ -189,7 +189,7 @@ class ConverterOutput extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 6,
-                          horizontal: 8,
+                          horizontal: 4,
                         ),
                         alignment: Alignment.center,
                         child: const Text(
@@ -245,12 +245,12 @@ class ConverterOutput extends StatelessWidget {
       decoration: BoxDecoration(color: ms == 0.0 ? Colors.grey.shade50 : null),
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           alignment: Alignment.center,
           child: Text(note, style: style),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
           alignment: Alignment.center,
           child: Text(
             ms == 0.0 ? "- - -" : "${ms.toStringAsFixed(3)} ms",
@@ -286,7 +286,7 @@ class ConverterOutput extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
           alignment: Alignment.center,
           child: Text(
-            dottedMs == 0.0 ? "- - -" : "${dottedMs.toStringAsFixed(3)}",
+            dottedMs == 0.0 ? "- - -" : "${dottedMs.toStringAsFixed(3)} ms",
             style: style.copyWith(
               color: dottedMs == 0.0 ? Colors.grey.shade600 : style.color,
             ),
@@ -303,7 +303,7 @@ class ConverterOutput extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
           alignment: Alignment.center,
           child: Text(
-            tripletMs == 0.0 ? "- - -" : "${tripletMs.toStringAsFixed(3)}",
+            tripletMs == 0.0 ? "- - -" : "${tripletMs.toStringAsFixed(3)} ms",
             style: style.copyWith(
               color: tripletMs == 0.0 ? Colors.grey.shade600 : style.color,
             ),
