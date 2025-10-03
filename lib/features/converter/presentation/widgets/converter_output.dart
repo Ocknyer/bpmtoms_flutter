@@ -25,9 +25,9 @@ class ConverterOutput extends StatelessWidget {
   }
 
   Widget _buildMsOutput(double ms) {
-    const textStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+    const textStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
     const headerStyle = TextStyle(
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Colors.blue,
     );
@@ -42,12 +42,12 @@ class ConverterOutput extends StatelessWidget {
             border: Border.all(color: Colors.blue.shade100),
             borderRadius: BorderRadius.circular(8),
           ),
-          margin: const EdgeInsets.symmetric(vertical: 4),
+          margin: const EdgeInsets.symmetric(vertical: 2),
           child: Column(
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade50,
                   borderRadius: const BorderRadius.vertical(
@@ -100,21 +100,21 @@ class ConverterOutput extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
 
-        // Dotted
+        // Dotted & Triplet
         Container(
           width: 300,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue.shade100),
             borderRadius: BorderRadius.circular(8),
           ),
-          margin: const EdgeInsets.symmetric(vertical: 4),
+          margin: const EdgeInsets.symmetric(vertical: 2),
           child: Column(
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade50,
                   borderRadius: const BorderRadius.vertical(
@@ -122,97 +122,111 @@ class ConverterOutput extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "Dotted (×1.5)",
+                  "Dotted & Triplet",
                   style: headerStyle,
                   textAlign: TextAlign.center,
                 ),
               ),
               Table(
                 columnWidths: const {
-                  0: FixedColumnWidth(100),
-                  1: FixedColumnWidth(200),
+                  0: FixedColumnWidth(75), // Dotted 음표
+                  1: FixedColumnWidth(75), // Dotted ms
+                  2: FixedColumnWidth(75), // Triplet 음표
+                  3: FixedColumnWidth(75), // Triplet ms
                 },
                 border: TableBorder(
                   horizontalInside: BorderSide(color: Colors.blue.shade50),
                 ),
                 children: [
-                  _buildTableRow(
+                  TableRow(
+                    decoration: BoxDecoration(color: Colors.blue.shade50),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Dotted",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "(×1.5)",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "Triplet",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8,
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          "(×⅔)",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  _buildQuadTableRow(
                     "1/8D",
                     ConverterService.getDottedNoteMs(ms, 2),
-                    textStyle,
-                  ),
-                  _buildTableRow(
-                    "1/16D",
-                    ConverterService.getDottedNoteMs(ms, 4),
-                    textStyle,
-                  ),
-                  _buildTableRow(
-                    "1/32D",
-                    ConverterService.getDottedNoteMs(ms, 8),
-                    textStyle,
-                  ),
-                  _buildTableRow(
-                    "1/64D",
-                    ConverterService.getDottedNoteMs(ms, 16),
-                    textStyle,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Triplet
-        Container(
-          width: 300,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue.shade100),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          margin: const EdgeInsets.symmetric(vertical: 4),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(7),
-                  ),
-                ),
-                child: const Text(
-                  "Triplet (×⅔)",
-                  style: headerStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Table(
-                columnWidths: const {
-                  0: FixedColumnWidth(100),
-                  1: FixedColumnWidth(200),
-                },
-                border: TableBorder(
-                  horizontalInside: BorderSide(color: Colors.blue.shade50),
-                ),
-                children: [
-                  _buildTableRow(
                     "1/8T",
                     ConverterService.getTripletNoteMs(ms, 2),
                     textStyle,
                   ),
-                  _buildTableRow(
+                  _buildQuadTableRow(
+                    "1/16D",
+                    ConverterService.getDottedNoteMs(ms, 4),
                     "1/16T",
                     ConverterService.getTripletNoteMs(ms, 4),
                     textStyle,
                   ),
-                  _buildTableRow(
+                  _buildQuadTableRow(
+                    "1/32D",
+                    ConverterService.getDottedNoteMs(ms, 8),
                     "1/32T",
                     ConverterService.getTripletNoteMs(ms, 8),
                     textStyle,
                   ),
-                  _buildTableRow(
+                  _buildQuadTableRow(
+                    "1/64D",
+                    ConverterService.getDottedNoteMs(ms, 16),
                     "1/64T",
                     ConverterService.getTripletNoteMs(ms, 16),
                     textStyle,
@@ -231,20 +245,67 @@ class ConverterOutput extends StatelessWidget {
       decoration: BoxDecoration(color: ms == 0.0 ? Colors.grey.shade50 : null),
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
           alignment: Alignment.center,
           child: Text(note, style: style),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
           alignment: Alignment.center,
           child: Text(
             ms == 0.0 ? "- - -" : "${ms.toStringAsFixed(3)} ms",
             style: style.copyWith(
               color: ms == 0.0 ? Colors.grey.shade600 : style.color,
-              fontFeatures: [
-                if (!ms.isNaN && ms != 0.0) const FontFeature.tabularFigures(),
-              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  TableRow _buildQuadTableRow(
+    String dottedNote,
+    double dottedMs,
+    String tripletNote,
+    double tripletMs,
+    TextStyle style,
+  ) {
+    return TableRow(
+      decoration: BoxDecoration(
+        color: dottedMs == 0.0 ? Colors.grey.shade50 : null,
+      ),
+      children: [
+        // Dotted 음표
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+          alignment: Alignment.center,
+          child: Text(dottedNote, style: style),
+        ),
+        // Dotted ms
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+          alignment: Alignment.center,
+          child: Text(
+            dottedMs == 0.0 ? "- - -" : "${dottedMs.toStringAsFixed(3)}",
+            style: style.copyWith(
+              color: dottedMs == 0.0 ? Colors.grey.shade600 : style.color,
+            ),
+          ),
+        ),
+        // Triplet 음표
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+          alignment: Alignment.center,
+          child: Text(tripletNote, style: style),
+        ),
+        // Triplet ms
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+          alignment: Alignment.center,
+          child: Text(
+            tripletMs == 0.0 ? "- - -" : "${tripletMs.toStringAsFixed(3)}",
+            style: style.copyWith(
+              color: tripletMs == 0.0 ? Colors.grey.shade600 : style.color,
             ),
           ),
         ),
